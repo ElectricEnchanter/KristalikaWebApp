@@ -20,5 +20,23 @@ public class MainController {
 		return "about";
 	}
 
+	@GetMapping("/masters")
+	public String masters(Model model) {
+		model.addAttribute("title", " страница про мастер");
+		return "masters";
+	}
+
+	@GetMapping("/price")
+	public String price(Model model) {
+		model.addAttribute("title", " страница про цену");
+		return "price";
+	}
+
+	@GetMapping("/appointment")
+	public String appointment(Model model) {
+		model.addAttribute("title", " страница про pfgbcm");
+		return "appointment";
+	}
+
 
 }
