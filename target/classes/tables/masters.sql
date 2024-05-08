@@ -5,6 +5,7 @@ CREATE TABLE masters(
 );
 
 INSERT INTO masters (name, pin)  VALUES ('Tatyana', 1111);
+INSERT INTO masters (name, pin)  VALUES ('Данил', 1122);
 
 
 SELECT name FROM Masters WHERE pin = 1111

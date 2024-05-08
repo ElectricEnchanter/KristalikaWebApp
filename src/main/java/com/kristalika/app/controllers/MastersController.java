@@ -29,13 +29,11 @@ public class MastersController {
 	public String login(@RequestParam int pin , Model model) {
 		String master = mastersRepository.findNameByPin(pin);
 		if (master != null) {
+			model.addAttribute("userName", master);
 			return "service";
 		} else {
 			return "home";
 		}
-
 	}
-
-
 	
 }
