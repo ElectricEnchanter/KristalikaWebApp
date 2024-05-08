@@ -13,8 +13,14 @@
 <p th:text="|Hello, ${title}!|" />
 
 <div class="container mt-5">
-    <h1>Про нас</h1>
+    <h1>Эта страница для наших мастеров</h1><br>
+    <h1>Введите пин-код</h1>
+    <form action="/login" method="post">
+        <input type="password" name="pin" placeholder="Введите пин-код">
+        <button type="submit">Войти</button>
+    </form>
 </div>
+
 
 <div th:insert="~{blocks/foooter :: footer}"></div>
 </body>

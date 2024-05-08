@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="~{blocks/header :: header}"></header>
 
 <p th:text="|Hello, ${title}!|" />
 
@@ -22,6 +22,6 @@
     </div>
 </div>
 
-<div th:insert="blocks/foooter :: footer"></div>
+<div th:insert="~{blocks/foooter :: footer}"></div>
 </body>
 </html>
