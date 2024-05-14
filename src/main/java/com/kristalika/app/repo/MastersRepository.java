@@ -9,4 +9,7 @@ public interface MastersRepository extends CrudRepository<Masters, Long> {
 	@Query("SELECT name FROM Masters WHERE pin = ?1")
 	String findNameByPin(int pin);
 
+	@Query("SELECT '*' FROM Masters WHERE pin = ?1")
+	Masters findByPin(int pin);
+
 }

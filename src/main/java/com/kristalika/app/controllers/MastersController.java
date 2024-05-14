@@ -27,13 +27,26 @@ public class MastersController {
 
 	@PostMapping("/login")
 	public String login(@RequestParam int pin , Model model) {
-		String master = mastersRepository.findNameByPin(pin);
+		Masters master = mastersRepository.findByPin(pin);
+//		String master = mastersRepository.findNameByPin(pin);
 		if (master != null) {
 			model.addAttribute("userName", master);
 			return "service";
 		} else {
-			return "home";
+			return "redirect:/home";
 		}
 	}
-	
+
+	@GetMapping("/service")
+	public String service(Model model) {
+		return "service";
+	}
+
+	@GetMapping("/home")
+	public String home(Model model) {
+		return "home";
+	}
+
+
+
 }

@@ -20,6 +20,12 @@ public class Masters {
 		this.pin = pin;
 	}
 
+	public Masters(Long id, String name, int pin) {
+		this.id = id;
+		this.name = name;
+		this.pin = pin;
+	}
+
 
 	public Long getId() {
 		return id;
