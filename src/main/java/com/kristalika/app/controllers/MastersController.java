@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -70,6 +72,12 @@ public class MastersController {
 				break;
 			}
 		}
+
+		Date today = new Date();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+		String formattedDate = formatter.format(today);
+		model.addAttribute("date", formattedDate);
 		return "service";
 	}
 
