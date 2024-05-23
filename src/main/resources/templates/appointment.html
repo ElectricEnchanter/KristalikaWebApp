@@ -22,18 +22,28 @@
 
 <div class="container mt-5">
     <h1>Записаться к нам</h1>
+    <form action="/appointment" method="post">
+    <input type="text" name="datepick" class="date" placeholder="Выберите дату">
 
-    <input type="text" class="date" placeholder="Выберите дату">
-
-
-    <select name="appointment">
-        <option value="morning">8:00</option>
-        <option value="day">12:00</option>
-        <option value="night">15:00</option>
+    <select name="masterpick">
+        <option value=1>Татьяна</option>
+        <option value=2>Данил</option>
     </select>
 
-    <button type="submit">Войти</button>
+
+    <button type="submit" class="btn btn-success">Найти записи</button>
+    </form>
+
+    <h2>Выберите время</h2>
+
+    <div th:each="el : ${appointment}" class="alert alert-info mt-2">
+        <h3 th:text="${el.date}"/>
+        <p th:text="${el.time}"/>
+        <p th:text="${el.id}"/>
+        <a th:href="'/appointment/' + ${el.id} + '/success'" class="btn btn-warning">Записаться</a>
+    </div>
 </div>
+
 
 <div th:insert="~{blocks/foooter :: footer}"></div>
 
@@ -44,7 +54,7 @@
     flatpickr(".date", {
         altInput: true,
         altFormat: "d.m.y",
-        dateFormat: "d-m-y",
+        dateFormat: "d.m.y",
         minDate: "today",
         maxDate: new Date().fp_incr(14),
         locale: {

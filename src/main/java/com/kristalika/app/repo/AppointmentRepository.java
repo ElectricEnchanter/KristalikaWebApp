@@ -9,6 +9,6 @@ import java.util.List;
 public interface AppointmentRepository extends CrudRepository<Appointment, Long> {
 
     @Query(value = "SELECT * FROM Appointment WHERE date = ?1 AND master_id = ?2 ORDER BY time", nativeQuery = true)
-    Iterable<Appointment> findAppointmentByDate(String date, Long id);
+    Iterable<Appointment> findAppointmentByDateAndId(String date, Long id);
 
 }

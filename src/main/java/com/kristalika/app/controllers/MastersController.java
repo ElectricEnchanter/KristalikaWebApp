@@ -80,7 +80,7 @@ public class MastersController {
 				String username = cookie.getValue();
 				Long id = mastersRepository.findIdByName(username);
 				model.addAttribute("userName", username);
-				Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDate(formattedDate, id);
+				Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
 
 				System.out.println(formattedDate);
 				System.out.println(appointment);

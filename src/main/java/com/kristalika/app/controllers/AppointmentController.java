@@ -32,7 +32,20 @@ public class AppointmentController {
 
 	@GetMapping("/appointment")
 	public String appointment(Model model) {
-		model.addAttribute("title", " страница про pfgbcm");
+		model.addAttribute("title", " страница про запись");
+		return "appointment";
+	}
+
+	@PostMapping("/appointment")
+	public String appointmentPost(@RequestParam("datepick") String date, @RequestParam ("masterpick") Long masterName, Model model ){
+		System.out.println(date);
+;
+		Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, masterName);
+		model.addAttribute("appointment", appointment);
+
+		System.out.println(appointment);
+		System.out.println(date);
+		System.out.println(masterName);
 		return "appointment";
 	}
 
