@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сервис</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<header th:insert="~{blocks/header :: header}"></header>
+
+<p th:text="|Hello, ${title}!|"/>
+
+
+<div class="container mt-5">
+    <h1>Эта страница делать запись</h1><br>
+    <h2 th:utext="'Добрый день, Вы хотите выбрать эту запись?' "></h2><br>
+
+    <div th:each="el : ${appointment}" class="alert alert-info mt-2">
+        <h3 th:text="${el.date}"/>
+        <p th:text="${el.time}"/>
+        <p th:text="${el.id}"/>
+<!--        <a th:href="'/appointment/' + ${el.id} + '/success'" class="btn btn-warning">Записаться</a>-->
+    </div>
+
+
+
+</div>
+
+<div class="container mt-5 mb-5">
+    <h1>Расскажите нам о себе</h1>
+    <form method="post">
+        <input type="text" name="client" placeholder="Введите Ваше имя и фамилию" class="form-control"><br>
+        <input type="text" name="info" placeholder="Введите Ваш телефон" class="form-control"><br>
+        <input type="text" name="note" placeholder="Введите что вы хотите, чтобы сделал мастер" class="form-control"><br>
+        <button type="submit" class="btn btn-success">Добавить статью</button>
+    </form>
+</div>
+
+
+<div th:insert="~{blocks/foooter :: footer}"></div>
+</body>
+</html>
+

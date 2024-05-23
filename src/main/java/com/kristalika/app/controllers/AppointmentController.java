@@ -1,11 +1,10 @@
 package com.kristalika.app.controllers;
 
 import com.kristalika.app.models.Appointment;
-import com.kristalika.app.models.Masters;
-import com.kristalika.app.models.Post;
+import com.kristalika.app.models.Clients;
 import com.kristalika.app.repo.AppointmentRepository;
+import com.kristalika.app.repo.ClientRepository;
 import com.kristalika.app.repo.MastersRepository;
-import com.kristalika.app.repo.PostRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,71 +15,153 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 public class AppointmentController {
 
 
-	@Autowired
-	private AppointmentRepository appointmentRepository;
-	@Autowired
-	private MastersRepository mastersRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+    @Autowired
+    private MastersRepository mastersRepository;
+    @Autowired
+    private ClientRepository clientRepository;
 
-	@GetMapping("/appointment")
-	public String appointment(Model model) {
-		model.addAttribute("title", " страница про запись");
-		return "appointment";
-	}
+    @GetMapping("/appointment")
+    public String appointment(Model model) {
+        model.addAttribute("title", " страница про запись");
+        return "appointment";
+    }
 
-	@PostMapping("/appointment")
-	public String appointmentPost(@RequestParam("datepick") String date, @RequestParam ("masterpick") Long masterName, Model model ){
-		System.out.println(date);
-;
-		Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, masterName);
-		model.addAttribute("appointment", appointment);
+    @PostMapping("/appointment")
+    public String appointmentPost(@RequestParam("datepick") String date, @RequestParam("masterpick") Long masterName, Model model) {
+        System.out.println(date);
 
-		System.out.println(appointment);
-		System.out.println(date);
-		System.out.println(masterName);
-		return "appointment";
-	}
+        Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, masterName);
+        model.addAttribute("appointment", appointment);
 
-	@GetMapping("/appointment/add")
-	public String appointmentAdd(Model model) {
-		model.addAttribute("title", " страница про добав");
-		return "appointment-add";
-	}
+        System.out.println(appointment);
+        System.out.println(date);
+        System.out.println(masterName);
+        return "appointment";
+    }
 
-	@PostMapping("/appointment/add")
-	public String appointmentDBAdd(@RequestParam("datepick") String date, @RequestParam("timepick") String time, HttpServletRequest request, Model model) {
+    @GetMapping("/appointment/{id}/make")
+    public String appointmentMake(@PathVariable(value = "id") Long id, Model model) {
+        if (!appointmentRepository.existsById(id)) {
+            return "redirect:/appointment";
+        }
+        Optional<Appointment> appointment = appointmentRepository.findById(id);
+        ArrayList<Appointment> res = new ArrayList<>();
+        appointment.ifPresent(res::add);
+        model.addAttribute("appointment", res);
 
-		if (Objects.equals(date, "") || Objects.equals(time, "")) return "appointment-add";
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("userName")) {
-				String username = cookie.getValue();
-				Long id = mastersRepository.findIdByName(username);
-				Appointment appointment = new Appointment(id, date, time);
-				appointmentRepository.save(appointment);
-				break;
-			}
-		}
+        return "appointment-make";
+    }
 
-		// Обработать дату
-		System.out.println("Selected date:" + date + "dasd");
-		System.out.println("Selected time: " + time);
+    @PostMapping("/appointment/{id}/make")
+    public String appointmentMakeAdd(@PathVariable(value = "id") Long apppointId, @RequestParam("client") String name, @RequestParam("info") String info, @RequestParam("note") String note, Model model) {
+        Clients client = new Clients(apppointId, name, info, note);
+        clientRepository.save(client);
+        return "appointment-success";
+    }
+
+    @GetMapping("/appointment/add")
+    public String appointmentAdd(Model model) {
+        model.addAttribute("title", " страница про добав");
+        return "appointment-add";
+    }
+
+    @PostMapping("/appointment/add")
+    public String appointmentDBAdd(@RequestParam("datepick") String date, @RequestParam("timepick") String time, HttpServletRequest request, Model model) {
+
+        if (Objects.equals(date, "") || Objects.equals(time, "")) return "appointment-add";
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userName")) {
+                String username = cookie.getValue();
+                Long id = mastersRepository.findIdByName(username);
+                Appointment appointment = new Appointment(id, date, time);
+                appointmentRepository.save(appointment);
+                break;
+            }
+        }
+
+        // Обработать дату
+        System.out.println("Selected date:" + date + "dasd");
+        System.out.println("Selected time: " + time);
 
 
-		return "appointment-add";
-	}
+        return "appointment-add";
+    }
 
-	@GetMapping("/appointment/{id}/delete")
-	public String AppointmentPostDelete(@PathVariable(value = "id") Long id, Model model) {
-		appointmentRepository.deleteById(id);
-		return "redirect:/service";
-	}
+    @GetMapping("/appointment/{id}/delete")
+    public String AppointmentDelete(@PathVariable(value = "id") Long id, Model model) {
+        appointmentRepository.deleteById(id);
+        return "redirect:/service";
+    }
+
+    @GetMapping("/appointment/{id}/success")
+    public String AppointmentSuccess(@PathVariable(value = "id") Long id, Model model) {
+//		postRepository.deleteById(id);
+        return "redirect:/blog";
+    }
+
+    @GetMapping("/appointment/show")
+    public String appointmentShow(Model model, HttpServletRequest request) {
+        Date today = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+        String formattedDate = formatter.format(today);
+        model.addAttribute("date", formattedDate);
+        formatter = new SimpleDateFormat("dd.MM.yy"); // "dd" - день, "MM" - месяц, "yyyy" - год
+        formattedDate = formatter.format(today);
+
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userName")) {
+                String username = cookie.getValue();
+                Long id = mastersRepository.findIdByName(username);
+                model.addAttribute("userName", username);
+                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
+
+                System.out.println(formattedDate);
+                System.out.println(appointment);
+                System.out.println(id);
+
+                formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+                formattedDate = formatter.format(today);
+
+                model.addAttribute("appointment", appointment);
+                model.addAttribute("date", formattedDate);
+                break;
+            }
+        }
+
+        return "appointment-show";
+    }
+
+    @PostMapping("/appointment/show")
+    public String appointmentShowElseDate(@RequestParam("datepick") String date, Model model, HttpServletRequest request) {
+//        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+//        String formattedDate = formatter.format(date);
+        model.addAttribute("date", date);
+
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userName")) {
+                String username = cookie.getValue();
+                Long id = mastersRepository.findIdByName(username);
+                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, id);
+                model.addAttribute("appointment", appointment);
+            }
+        }
+
+
+        return "appointment-show";
+    }
 }

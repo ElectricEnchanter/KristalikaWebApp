@@ -25,14 +25,14 @@ import java.util.Optional;
 @Controller
 public class MastersController {
 
-	@Autowired
-	private MastersRepository mastersRepository;
-	@Autowired
-	private AppointmentRepository appointmentRepository;
+    @Autowired
+    private MastersRepository mastersRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
 //	private HttpServletRequest request;
 
-	@GetMapping("/login")
-	public String login(Model model, HttpServletRequest request){
+    @GetMapping("/login")
+    public String login(Model model, HttpServletRequest request) {
 //		HttpSession session = request.getSession();
 //		Integer count = (Integer) session.getAttribute("count");
 //		if(count == null){
@@ -43,74 +43,65 @@ public class MastersController {
 //			session.setAttribute("count", count + 1);
 //		}
 
-		//счетчик заходов
+        //счетчик заходов
 
 //		model.addAttribute("count", count);
-		return "login";
-	}
+        return "login";
+    }
 
-	@PostMapping("/login")
-	public String login(@RequestParam int pin, Model model, HttpServletResponse response) {
+    @PostMapping("/login")
+    public String login(@RequestParam int pin, Model model, HttpServletResponse response) {
 
-		String master = mastersRepository.findNameByPin(pin);
+        String master = mastersRepository.findNameByPin(pin);
 
-		Cookie cookie1 = new Cookie("userName", master);
-		cookie1.setMaxAge(24 * 60 * 60);
-		response.addCookie(cookie1);
+        Cookie cookie1 = new Cookie("userName", master);
+        cookie1.setMaxAge(24 * 60 * 60);
+        response.addCookie(cookie1);
 
-		if (master != null) {
-			model.addAttribute("userName", master);
-			return "redirect:/service";
-		} else {
-			return "redirect:/home";
-		}
-	}
+        if (master != null) {
+            model.addAttribute("userName", master);
+            return "redirect:/service";
+        } else {
+            return "redirect:/home";
+        }
+    }
 
-	@GetMapping("/service")
-	public String service(Model model, HttpServletRequest request) {
-		Date today = new Date();
+    @GetMapping("/service")
+    public String service(Model model, HttpServletRequest request) {
+        Date today = new Date();
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy"); // "dd" - день, "MM" - месяц, "yyyy" - год
-		String formattedDate = formatter.format(today);
-
-
-		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("userName")) {
-				String username = cookie.getValue();
-				Long id = mastersRepository.findIdByName(username);
-				model.addAttribute("userName", username);
-				Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
-
-				System.out.println(formattedDate);
-				System.out.println(appointment);
-				System.out.println(id);
-
-				formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
-				formattedDate = formatter.format(today);
-
-				model.addAttribute("appointment", appointment);
-				model.addAttribute("date", formattedDate);
-				break;
-			}
-		}
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy"); // "dd" - день, "MM" - месяц, "yyyy" - год
+        String formattedDate = formatter.format(today);
 
 
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userName")) {
+                String username = cookie.getValue();
+                Long id = mastersRepository.findIdByName(username);
+                model.addAttribute("userName", username);
+                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
 
+                System.out.println(formattedDate);
+                System.out.println(appointment);
+                System.out.println(id);
 
+                formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+                formattedDate = formatter.format(today);
 
+                model.addAttribute("appointment", appointment);
+                model.addAttribute("date", formattedDate);
+                break;
+            }
+        }
 
+        return "service";
+    }
 
-
-
-		return "service";
-	}
-
-	@GetMapping("/home")
-	public String home(Model model) {
-		return "home";
-	}
-
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "home";
+    }
 
 
 }

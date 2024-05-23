@@ -21,26 +21,19 @@
 <p th:text="|Hello, ${title}!|"/>
 
 <div class="container mt-5">
-    <h1>Записаться к нам</h1>
-    <form action="/appointment" method="post">
+    <h2 th:utext="'Ваше расписание на ' + ${date}"></h2><br>
+
+    <form action="/appointment/show" method="post">
+
     <input type="text" name="datepick" class="date" placeholder="Выберите дату">
-
-    <select name="masterpick">
-        <option value=1>Татьяна</option>
-        <option value=2>Данил</option>
-    </select>
-
-
     <button type="submit" class="btn btn-success">Найти записи</button>
     </form>
-
-    <h2>Выберите время</h2>
 
     <div th:each="el : ${appointment}" class="alert alert-info mt-2">
         <h3 th:text="${el.date}"/>
         <p th:text="${el.time}"/>
         <p th:text="${el.id}"/>
-        <a th:href="'/appointment/' + ${el.id} + '/make'" class="btn btn-warning">Записаться</a>
+        <a th:href="'/appointment/' + ${el.id} + '/delete'" class="btn btn-warning">Удалить запись</a>
     </div>
 </div>
 
