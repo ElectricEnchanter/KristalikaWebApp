@@ -14,48 +14,22 @@
 
 <p th:text="|Hello, ${title}!|"/>
 
+
 <div class="container mt-5">
     <h1>Эта страница для наших мастеров</h1><br>
     <h2 th:utext="'Добрый день, ' + ${userName}"></h2><br>
     <h2 th:utext="'Ваше расписание на ' + ${date}"></h2><br>
 
-
-    <div class="container">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th class="text-center">Время</th>
-                <th class="text-center">Событие</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="text-center">09:00 - 10:00</td>
-                <td>Математика</td>
-            </tr>
-            <tr>
-                <td>10:00 - 11:00</td>
-                <td>Физика</td>
-            </tr>
-            <tr>
-                <td>12:00 - 13:00</td>
-                <td>Обед</td>
-            </tr>
-            <tr>
-                <td>13:00 - 14:00</td>
-                <td>Информатика</td>
-            </tr>
-            <tr>
-                <td>15:00 - 16:00</td>
-                <td>Английский язык</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <li><a class="link-secondary text-decoration-none" href="/appointment/add">Выставить расписание</a></li>
-
-
+    <div th:each="el : ${appointment}" class="alert alert-info mt-2">
+        <h3 th:text="${el.date}"/>
+        <p th:text="${el.time}"/>
+        <p th:text="${el.id}"/>
+        <a th:href="'/appointment/' + ${el.id} + '/delete'" class="btn btn-warning">Удалить запись</a>
     </div>
+
+    <li><a class="link-secondary text-decoration-none" href="/appointment/add">Выставить расписание</a></li>
+
+
 </div>
 
 

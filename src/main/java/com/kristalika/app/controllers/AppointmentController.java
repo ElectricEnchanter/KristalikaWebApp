@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,7 +43,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/appointment/add")
-	public String appointmentDBAdd(@RequestParam("datepick") String date, @RequestParam("timepick") String time ,HttpServletRequest request, Model model){
+	public String appointmentDBAdd(@RequestParam("datepick") String date, @RequestParam("timepick") String time, HttpServletRequest request, Model model) {
 
 		if (Objects.equals(date, "") || Objects.equals(time, "")) return "appointment-add";
 		Cookie[] cookies = request.getCookies();
@@ -61,9 +62,12 @@ public class AppointmentController {
 		System.out.println("Selected time: " + time);
 
 
-
 		return "appointment-add";
 	}
 
-
+	@GetMapping("/appointment/{id}/delete")
+	public String AppointmentPostDelete(@PathVariable(value = "id") Long id, Model model) {
+		appointmentRepository.deleteById(id);
+		return "redirect:/service";
+	}
 }

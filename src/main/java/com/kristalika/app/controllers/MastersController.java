@@ -1,7 +1,9 @@
 package com.kristalika.app.controllers;
 
+import com.kristalika.app.models.Appointment;
 import com.kristalika.app.models.Masters;
 import com.kristalika.app.models.Post;
+import com.kristalika.app.repo.AppointmentRepository;
 import com.kristalika.app.repo.MastersRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +27,9 @@ public class MastersController {
 
 	@Autowired
 	private MastersRepository mastersRepository;
-	private HttpServletRequest request;
+	@Autowired
+	private AppointmentRepository appointmentRepository;
+//	private HttpServletRequest request;
 
 	@GetMapping("/login")
 	public String login(Model model, HttpServletRequest request){
@@ -64,20 +68,41 @@ public class MastersController {
 
 	@GetMapping("/service")
 	public String service(Model model, HttpServletRequest request) {
+		Date today = new Date();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy"); // "dd" - день, "MM" - месяц, "yyyy" - год
+		String formattedDate = formatter.format(today);
+
+
 		Cookie[] cookies = request.getCookies();
 		for (Cookie cookie : cookies) {
 			if (cookie.getName().equals("userName")) {
 				String username = cookie.getValue();
+				Long id = mastersRepository.findIdByName(username);
 				model.addAttribute("userName", username);
+				Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDate(formattedDate, id);
+
+				System.out.println(formattedDate);
+				System.out.println(appointment);
+				System.out.println(id);
+
+				formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+				formattedDate = formatter.format(today);
+
+				model.addAttribute("appointment", appointment);
+				model.addAttribute("date", formattedDate);
 				break;
 			}
 		}
 
-		Date today = new Date();
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
-		String formattedDate = formatter.format(today);
-		model.addAttribute("date", formattedDate);
+
+
+
+
+
+
+
 		return "service";
 	}
 
