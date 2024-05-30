@@ -178,15 +178,17 @@ public class AppointmentController {
                     System.out.println(ids.get(i));
                     Iterable<Clients> clients = clientRepository.findAppointmentById(ids.get(i));
                     System.out.println(clients);
-                    if (Objects.equals(clients.toString(), "[]")) {
+                    if (Objects.equals(clients.toString(), "[]")){
                         System.out.println("Свободно");
                         status.addLast("Свободно");
-                    } else {
+                    }
+                    else {
                         System.out.println("Занято");
                         status.addLast("Занято");
                     }
                 }
                 model.addAttribute("status", status);
+
 
 
             }

@@ -103,5 +103,21 @@ public class MastersController {
         return "home";
     }
 
+    @GetMapping("/pin-reset")
+    public String pinReset(Model model) {
+        return "/pin-reset";
+    }
+
+    @PostMapping("/pin-reset")
+    public String pinResetPost(@RequestParam int oldPin, @RequestParam int newPin, Model model) {
+
+        String master = mastersRepository.findNameByPin(oldPin);
+
+        if (master != null) {
+             mastersRepository.updatePin(newPin, oldPin);
+        }
+        else System.out.println("666666");
+        return "redirect:/service";
+    }
 
 }
