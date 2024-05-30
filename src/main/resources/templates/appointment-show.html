@@ -25,14 +25,19 @@
 
     <form action="/appointment/show" method="post">
 
-    <input type="text" name="datepick" class="date" placeholder="Выберите дату">
+    <input type="text" name="datepick" class="date" placeholder="Выберите дату"><br>
     <button type="submit" class="btn btn-success">Найти записи</button>
     </form>
 
-    <div th:each="el : ${appointment}" class="alert alert-info mt-2">
+    <div th:each="el : ${appointment}"  class="alert alert-info mt-2">
         <h3 th:text="${el.date}"/>
         <p th:text="${el.time}"/>
         <p th:text="${el.id}"/>
+        <div th:each="el1 : ${status.getFirst()}">
+            <p th:text="${el1}"/>
+            <p th:each="el1 : ${status.removeFirst()}">
+        </div>
+
         <a th:href="'/appointment/' + ${el.id} + '/delete'" class="btn btn-warning">Удалить запись</a>
     </div>
 </div>

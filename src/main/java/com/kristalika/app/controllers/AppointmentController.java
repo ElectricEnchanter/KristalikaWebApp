@@ -42,12 +42,18 @@ public class AppointmentController {
     public String appointmentPost(@RequestParam("datepick") String date, @RequestParam("masterpick") Long masterName, Model model) {
         System.out.println(date);
 
-        Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, masterName);
-        model.addAttribute("appointment", appointment);
+        Iterable<Appointment> appointment = appointmentRepository.findAppointmentNotExist(date, masterName);
 
         System.out.println(appointment);
-        System.out.println(date);
-        System.out.println(masterName);
+        ArrayList<Integer> ids = appointmentRepository.findIdByDateAndId(date, masterName);
+        System.out.println(ids);
+
+        model.addAttribute("appointment", appointment);
+
+
+//        System.out.println(appointment);
+//        System.out.println(date);
+//        System.out.println(masterName);
         return "appointment";
     }
 
@@ -149,6 +155,12 @@ public class AppointmentController {
     public String appointmentShowElseDate(@RequestParam("datepick") String date, Model model, HttpServletRequest request) {
 //        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
 //        String formattedDate = formatter.format(date);
+
+
+        // тут можно переписать
+//        SELECT * FROM CLIENTS JOIN public.appointment a on a.id = CLIENTS.appointment_id;
+
+
         model.addAttribute("date", date);
 
         Cookie[] cookies = request.getCookies();
@@ -157,7 +169,26 @@ public class AppointmentController {
                 String username = cookie.getValue();
                 Long id = mastersRepository.findIdByName(username);
                 Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, id);
+                ArrayList<Integer> ids = appointmentRepository.findIdByDateAndId(date, id);
+                System.out.println(ids);
                 model.addAttribute("appointment", appointment);
+
+                ArrayList<String> status = new ArrayList<>();
+                for (int i = 0; i < ids.toArray().length; i++) {
+                    System.out.println(ids.get(i));
+                    Iterable<Clients> clients = clientRepository.findAppointmentById(ids.get(i));
+                    System.out.println(clients);
+                    if (Objects.equals(clients.toString(), "[]")) {
+                        System.out.println("Свободно");
+                        status.addLast("Свободно");
+                    } else {
+                        System.out.println("Занято");
+                        status.addLast("Занято");
+                    }
+                }
+                model.addAttribute("status", status);
+
+
             }
         }
 
