@@ -18,4 +18,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Long>
     @Query(value = "SELECT * FROM appointment WHERE NOT EXISTS( SELECT 1 FROM clients WHERE appointment.id = clients.appointment_id) AND appointment.date = ?1 AND appointment.master_id = ?2", nativeQuery = true)
     Iterable<Appointment> findAppointmentNotExist(String date, Long id);
 
+    @Query(value = "SELECT * FROM appointment WHERE NOT EXISTS( SELECT 1 FROM clients WHERE appointment.id = clients.appointment_id) AND appointment.date = ?1 AND appointment.master_id = ?2", nativeQuery = true)
+    String findMasterBy(String date, Long id);
+
 }

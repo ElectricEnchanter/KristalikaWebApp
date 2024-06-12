@@ -1779,7 +1779,8 @@
                         <div th:each="el : ${appointment}" class="alert alert-info mt-2">
                             <h3 th:text="'Дата: ' +  ${el.date}"/>
                             <p th:text="'Время: ' + ${el.time}"/>
-                            <p th:text="${el.id}"/>
+                            <p th:text="'Мастер: ' + ${master}"/>
+<!--                            <p th:text="${el.id}"/>-->
                             <a th:href="'/appointment/' + ${el.id} + '/make'"
                                class="BTN-SECONDARY w-fit h-12 px-6 text-sm whitespace-nowrap font-semibold uppercase flex gap-2 items-center rounded-full outline outline-black bg-white/5  hover:bg-black hover:text-slate-50 hover:duration-300   md:text-base md:h-14 md:px-8">Записаться на это время</a>
 

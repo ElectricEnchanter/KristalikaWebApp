@@ -17,6 +17,9 @@ public interface MastersRepository extends CrudRepository<Masters, Long> {
 	@Query("SELECT id FROM Masters WHERE name = ?1")
 	Long findIdByName(String name);
 
+	@Query("SELECT name FROM Masters WHERE id = ?1")
+	String findNameById(Long id);
+
 	@Transactional
 	@Modifying(clearAutomatically = true)
 	@Query(value = "UPDATE masters SET pin = ?1 WHERE pin = ?2", nativeQuery = true)

@@ -53,6 +53,8 @@ public class AppointmentController {
         } else {
             model.addAttribute("no", "Доступные записи:");
             model.addAttribute("appointment", appointment);
+            model.addAttribute("master", mastersRepository.findNameById(masterName));
+
         }
 
 
@@ -67,10 +69,15 @@ public class AppointmentController {
         if (!appointmentRepository.existsById(id)) {
             return "redirect:/appointment";
         }
+        System.out.println(mastersRepository.findNameById(id);
+
+        //null в имени
         Optional<Appointment> appointment = appointmentRepository.findById(id);
         ArrayList<Appointment> res = new ArrayList<>();
         appointment.ifPresent(res::add);
         model.addAttribute("appointment", res);
+        model.addAttribute("master", mastersRepository.findNameById(id));
+
 
         return "appointment-make";
     }
@@ -78,7 +85,13 @@ public class AppointmentController {
     @PostMapping("/appointment/{id}/make")
     public String appointmentMakeAdd(@PathVariable(value = "id") Long apppointId, @RequestParam("client") String name, @RequestParam("info") String info, @RequestParam("note") String note, Model model) {
         Clients client = new Clients(apppointId, name, info, note);
-        clientRepository.save(client);
+        System.out.println(clientRepository.findAppointmentById(apppointId));
+
+        if(clientRepository.findAppointmentById(apppointId).toString().equals("[]")){
+            System.out.println(clientRepository.findAppointmentById(apppointId));
+            clientRepository.save(client);
+            System.out.println("save");
+        }
         return "redirect:/appointment-success";
     }
 
@@ -181,7 +194,7 @@ public class AppointmentController {
                 ArrayList<String> status = new ArrayList<>();
                 for (int i = 0; i < ids.toArray().length; i++) {
                     System.out.println(ids.get(i));
-                    Iterable<Clients> clients = clientRepository.findAppointmentById(ids.get(i));
+                    Iterable<Clients> clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
                     System.out.println(clients);
                     if (Objects.equals(clients.toString(), "[]")){
                         System.out.println("Свободно");

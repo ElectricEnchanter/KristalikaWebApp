@@ -1699,10 +1699,10 @@
                 </h2>
 
                 <div th:each="el : ${appointment}" class="alert alert-info mt-2">
-                    <h3 th:text="${el.date}"/>
-                    <p th:text="${el.time}"/>
-                    <p th:text="${el.id}"/>
-                    <!--        <a th:href="'/appointment/' + ${el.id} + '/success'" class="btn btn-warning">Записаться</a>-->
+                    <h3 th:text="'Дата: ' +  ${el.date}"/>
+                    <p th:text="'Время: ' + ${el.time}"/>
+                    <p th:text="'Мастер: ' + ${master}"/>
+
                 </div>
 
 
