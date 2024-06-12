@@ -1,79 +1,4 @@
-<!--<!DOCTYPE HTML>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Записаться</title>-->
-<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>-->
-<!--    <link rel="shortcut icon" href="https://i.ibb.co/23wtJmm/icon-black.png" type="image/x-icon">-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"-->
-<!--            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"-->
-<!--            crossorigin="anonymous"></script>-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">-->
-
-
-<!--</head>-->
-
-<!--<body>-->
-
-
-<!--<header th:insert="~{blocks/header :: header}"></header>-->
-
-<!--<div class="container mt-5">-->
-<!--    <h1>Записаться к нам</h1>-->
-<!--    <form action="/appointment" method="post">-->
-<!--    <input type="text" name="datepick" class="date" placeholder="Выберите дату">-->
-
-<!--    <select name="masterpick">-->
-<!--        <option value=1>Татьяна</option>-->
-<!--        <option value=2>Данил</option>-->
-<!--    </select>-->
-
-
-<!--    <button type="submit" class="btn btn-success">Найти записи</button>-->
-<!--    </form>-->
-
-<!--    <h2>Выберите время</h2>-->
-
-<!--    <div th:each="el : ${appointment}" class="alert alert-info mt-2">-->
-<!--        <h3 th:text="${el.date}"/>-->
-<!--        <p th:text="${el.time}"/>-->
-<!--        <p th:text="${el.id}"/>-->
-<!--        <a th:href="'/appointment/' + ${el.id} + '/make'" class="btn btn-warning">Записаться</a>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--<div th:insert="~{blocks/foooter :: footer}"></div>-->
-
-
-<!--<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>-->
-<!--<script>-->
-
-<!--    flatpickr(".date", {-->
-<!--        altInput: true,-->
-<!--        altFormat: "d.m.y",-->
-<!--        dateFormat: "d.m.y",-->
-<!--        minDate: "today",-->
-<!--        maxDate: new Date().fp_incr(14),-->
-<!--        locale: {-->
-<!--            firstDayOfWeek: 1,-->
-<!--            weekdays: {-->
-<!--                shorthand: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],-->
-<!--                longhand: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],-->
-<!--            },-->
-<!--            months: {-->
-<!--                shorthand: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],-->
-<!--                longhand: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],-->
-<!--            },-->
-<!--        },-->
-
-<!--    } );-->
-<!--</script>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
+<!DOCTYPE HTML>
 <html lang="en"
       style="--ai-create-color-theme-50: #FFE8FB; --ai-create-color-theme-100: #F5D7F1; --ai-create-color-theme-200: #EBC6E7; --ai-create-color-theme-300: #E0B7DE; --ai-create-color-theme-400: #D6A8D5; --ai-create-color-theme-500: #CC99CC; --ai-create-color-theme-600: #B06BB3; --ai-create-color-theme-700: #934599; --ai-create-color-theme-800: #772680; --ai-create-color-theme-900: #5A0F66; --ai-create-color-theme-950: #40004D; --custom-heading-font: Playfair Display,ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont;, roboto, &quot;Helvetica Neue&quot;, arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; --custom-body-font: Open Sans,ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont;, roboto, &quot;Helvetica Neue&quot;, arial, &quot;Noto Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;;"
       class="fontawesome-i2svg-active fontawesome-i2svg-complete">
@@ -1778,12 +1703,7 @@
                         <div class="flex items-start">
                             <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
                                  propkey="officeHours_0_icon" data-library="FontAwesome">
-                                <svg class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false"
-                                     data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg"
-                                     viewBox="0 0 512 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M256 0a256 256 0 1 1 0 512A256 256 0 1 1 256 0zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"></path>
-                                </svg><!-- <i class="fa-solid fa-clock"></i> Font Awesome fontawesome.com --></div>
+                                <i class="fa-regular fa-calendar-days"></i></div>
                             <div class="ml-4">
 
                                 <h3 class="TITLE-SECONDARY text-lg font-medium text-slate-900 dark:text-white/90">
@@ -1805,12 +1725,7 @@
                         <div class="flex items-start">
                             <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
                                  propkey="officeHours_1_icon" data-library="FontAwesome">
-                                <svg class="svg-inline--fa fa-location-dot" aria-hidden="true" focusable="false"
-                                     data-prefix="fas" data-icon="location-dot" role="img"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"></path>
-                                </svg><!-- <i class="fa-solid fa-location-dot"></i> Font Awesome fontawesome.com -->
+                                <i class="fa-solid fa-users-line"></i>
                             </div>
                             <div class="ml-4">
                                 <h3 class="TITLE-SECONDARY text-lg font-medium text-slate-900 dark:text-white/90">
@@ -1831,25 +1746,25 @@
                                         </select>
                                     </div>
                                     <br></div>
-                                <button type="submit" class="btn btn-success">Найти записи</button>
+                                <button type="submit" class="BTN-PRIMARY w-fit h-12 mr-2 px-6 group whitespace-nowrap text-sm font-semibold uppercase text-white flex gap-2 items-center rounded-full bg-blue-500 hover:bg-blue-600 hover:transition-all hover:duration-300 md:text-base md:h-14 md:px-8">
+                                    <div class="_editable_jwu41_1 undefined" data-link="link=%2Fcontact&amp;target=_blank&amp;">
+                                        Найти записи
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right fa-beat-fade"></i>
+                                </button>
 
                                 </p></div>
 
                         </div>
-                        <div class="flex items-start">
-                            <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
-                                 propkey="officeHours_2_icon" data-library="FontAwesome">
-                                <svg class="svg-inline--fa fa-building" aria-hidden="true" focusable="false"
-                                     data-prefix="fas" data-icon="building" role="img"
-                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                                    <path fill="currentColor"
-                                          d="M48 0C21.5 0 0 21.5 0 48V464c0 26.5 21.5 48 48 48h96V432c0-26.5 21.5-48 48-48s48 21.5 48 48v80h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48H48zM64 240c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V240zm112-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V240zM80 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16zm80 16c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H176c-8.8 0-16-7.2-16-16V112zM272 96h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V112c0-8.8 7.2-16 16-16z"></path>
-                                </svg><!-- <i class="fa-solid fa-building"></i> Font Awesome fontawesome.com --></div>
 
-                        </div>
 
 
                     </div>
+                    <div class="flex items-start">
+                        <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
+                             propkey="officeHours_2_icon" data-library="FontAwesome">
+                            <i class="fa-solid fa-user-clock"></i></div>
+                        <br><br><br><br>
                     <div class="ml-4">
                         <h3 class="TITLE-SECONDARY text-lg font-medium text-slate-900 dark:text-white/90">
                             <div class="_editable_jwu41_1 undefined"
@@ -1859,25 +1774,24 @@
                         </h3>
                         <p class="DESC mt-4 text-sm font-normal text-slate-600 dark:text-white/90">
 
+                        <p th:text="|${no}|" />
+
                         <div th:each="el : ${appointment}" class="alert alert-info mt-2">
                             <h3 th:text="'Дата: ' +  ${el.date}"/>
                             <p th:text="'Время: ' + ${el.time}"/>
                             <p th:text="${el.id}"/>
                             <a th:href="'/appointment/' + ${el.id} + '/make'"
-                               class="btn btn-warning">Записаться</a>
+                               class="BTN-SECONDARY w-fit h-12 px-6 text-sm whitespace-nowrap font-semibold uppercase flex gap-2 items-center rounded-full outline outline-black bg-white/5  hover:bg-black hover:text-slate-50 hover:duration-300   md:text-base md:h-14 md:px-8">Записаться на это время</a>
+
                         </div>
+                    </div>
 
 
                         </p></div>
                     <div class="flex items-start">
                         <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
                              propkey="officeHours_3_icon" data-library="FontAwesome">
-                            <svg class="svg-inline--fa fa-phone" aria-hidden="true" focusable="false"
-                                 data-prefix="fas" data-icon="phone" role="img" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 512 512" data-fa-i2svg="">
-                                <path fill="currentColor"
-                                      d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"></path>
-                            </svg><!-- <i class="fa-solid fa-phone"></i> Font Awesome fontawesome.com --></div>
+                            <i class="fa-solid fa-phone-volume"></i></div>
                         <div class="ml-4">
                             <h3 class="TITLE-SECONDARY text-lg font-medium text-slate-900 dark:text-white/90">
                                 <div class="_editable_jwu41_1 undefined"

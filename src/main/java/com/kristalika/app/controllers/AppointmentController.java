@@ -48,7 +48,12 @@ public class AppointmentController {
         ArrayList<Integer> ids = appointmentRepository.findIdByDateAndId(date, masterName);
         System.out.println(ids);
 
-        model.addAttribute("appointment", appointment);
+        if (appointment.toString().equals("[]")) {
+            model.addAttribute("no", "Нет записей. Выбери другую дату или мастера!");
+        } else {
+            model.addAttribute("no", "Доступные записи:");
+            model.addAttribute("appointment", appointment);
+        }
 
 
 //        System.out.println(appointment);
@@ -74,7 +79,7 @@ public class AppointmentController {
     public String appointmentMakeAdd(@PathVariable(value = "id") Long apppointId, @RequestParam("client") String name, @RequestParam("info") String info, @RequestParam("note") String note, Model model) {
         Clients client = new Clients(apppointId, name, info, note);
         clientRepository.save(client);
-        return "appointment-success";
+        return "redirect:/appointment-success";
     }
 
     @GetMapping("/appointment/add")
@@ -193,8 +198,12 @@ public class AppointmentController {
 
             }
         }
-
-
         return "appointment-show";
+    }
+
+
+    @GetMapping("/appointment-success")
+    public String success(Model model) {
+        return "appointment-success";
     }
 }
