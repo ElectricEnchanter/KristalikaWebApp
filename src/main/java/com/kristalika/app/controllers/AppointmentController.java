@@ -69,14 +69,15 @@ public class AppointmentController {
         if (!appointmentRepository.existsById(id)) {
             return "redirect:/appointment";
         }
-        System.out.println(mastersRepository.findNameById(id);
+//        System.out.println(appointmentRepository.findIdByAppointments(id));
+//        System.out.println();
 
-        //null в имени
         Optional<Appointment> appointment = appointmentRepository.findById(id);
         ArrayList<Appointment> res = new ArrayList<>();
         appointment.ifPresent(res::add);
+
         model.addAttribute("appointment", res);
-        model.addAttribute("master", mastersRepository.findNameById(id));
+        model.addAttribute("master", appointmentRepository.findMasterNameById(appointmentRepository.findIdByAppointments(id)));
 
 
         return "appointment-make";
