@@ -105,6 +105,22 @@ public class MastersController {
         return "service";
     }
 
+
+    //доделать выход с аккаунта
+    @PostMapping
+    public String service(Model model, HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null)
+            for (Cookie cookie : cookies) {
+                System.out.println();
+                cookie.setValue("");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+        return "redirect:/login";
+    }
+
+
     @GetMapping("/home")
     public String home(Model model) {
         return "home";
@@ -123,7 +139,6 @@ public class MastersController {
         if (master != null) {
              mastersRepository.updatePin(newPin, oldPin);
         }
-        else System.out.println("666666");
         return "redirect:/service";
     }
 
