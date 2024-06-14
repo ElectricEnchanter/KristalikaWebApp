@@ -128,6 +128,7 @@ public class AppointmentController {
     @GetMapping("/appointment/{id}/delete")
     public String AppointmentDelete(@PathVariable(value = "id") Long id, Model model) {
         appointmentRepository.deleteById(id);
+        clientRepository.deleteByAppointmentId(id);
         return "redirect:/service";
     }
 
@@ -204,11 +205,10 @@ public class AppointmentController {
                     else {
                         System.out.println("Занято");
                         status.addLast("Занято");
+                        model.addAttribute("client", clients);
                     }
                 }
                 model.addAttribute("status", status);
-
-
 
             }
         }

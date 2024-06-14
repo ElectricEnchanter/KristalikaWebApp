@@ -33,6 +33,13 @@ public class MastersController {
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
+
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("userName")) {
+                return "redirect:/service";
+            }
+        }
 //		HttpSession session = request.getSession();
 //		Integer count = (Integer) session.getAttribute("count");
 //		if(count == null){

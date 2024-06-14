@@ -9,8 +9,6 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-
 </head>
 
 <body>
@@ -29,12 +27,18 @@
     </form>
 
     <div th:each="el : ${appointment}"  class="alert alert-info mt-2">
-        <h3 th:text="${el.date}"/>
-        <p th:text="${el.time}"/>
-        <p th:text="${el.id}"/>
+        <h3 th:text="'Дата: ' + ${el.date}"/>
+        <p th:text="'Время: ' + ${el.time}"/>
+<!--        <p th:text="${el.id}"/>-->
         <div th:each="el1 : ${status.getFirst()}">
-            <p th:text="${el1}"/>
+            <p th:text="'Статус: ' + ${el1}"/>
             <p th:each="el1 : ${status.removeFirst()}">
+        </div>
+
+        <div th:each="el2 : ${client}">
+            <p th:text="'Имя: ' + ${el2.getClientName()}"/>
+            <p th:text="'Телефон: ' + ${el2.getInfo()}"/>
+            <p th:text="'Пожелания: ' + ${el2.getNote()}">
         </div>
 
         <a th:href="'/appointment/' + ${el.id} + '/delete'" class="btn btn-warning">Удалить запись</a>
