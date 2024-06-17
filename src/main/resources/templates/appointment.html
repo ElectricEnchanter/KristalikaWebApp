@@ -15,9 +15,9 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Наша команда</title>
+    <title>Записаться</title>
     <meta name="description"
           content="Welcome to KristalikA, where your nail dreams come true! We specialize in glamorous nail art and impeccable nail care. Meet our talented team who will make your nails shine.">
     <meta property="og:description"
@@ -1687,7 +1687,7 @@
 <body>
 <header th:insert="~{blocks/header :: header}"></header>
 <form action="/appointment" method="post">
-    <section class="relative py-12 overflow-hidden bg-slate-50 sm:py-16 lg:py-20 xl:py-24 dark:bg-slate-800">
+    <section class="relative py-12 overflow-hidden bg-slate-50 sm:py-16 lg:py-20 xl:py-24 dark:bg-slate-800" data-aos="fade-up">
         <div class="absolute bottom-0 dark:bg-slate-700 left-0 lg:w-[50%] bg-sky-100 lg:h-[75%] hidden lg:block"></div>
         <div class="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div class="grid items-center grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-16 xl:gap-x-36">
@@ -1739,7 +1739,7 @@
                                 <div>
                                     <div class="_editable_jwu41_1 undefined"
                                          data-link="link=&amp;target=_blank&amp;">
-                                        <select name="masterpick">
+                                        <select class="form-select" name="masterpick">
                                             <option value="4">Выберите мастера</option>
                                             <option value=1>Татьяна</option>
                                             <option value=2>Данил</option>
@@ -1822,58 +1822,7 @@
         </div>
 
     </section>
-    <section class="bg-slate-50 dark:bg-slate-800 px-6 py-20 md:px-8">
-        <div>
-            <div class=" mx-auto max-w-7xl flex flex-col gap-20">
-                <div class="flex flex-col items-center gap-8 md:justify-between md:flex-row">
-                    <ul class="flex items-center gap-8">
-                        <li>
-                            <button class="TEXT-LINK font-semibold text-slate-900 dark:text-slate-50  hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
-                                <a class="nav-link" href="/price">О нас</a>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="TEXT-LINK font-semibold text-slate-900 dark:text-slate-50  hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
-                                <a class="nav-link" href="/price">Наши услуги</a>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="TEXT-LINK font-semibold text-slate-900 dark:text-slate-50  hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
-                                <a class="nav-link" href="/price">Проекты</a>
-                            </button>
-                        </li>
-                        <li>
-                            <button class="TEXT-LINK font-semibold text-slate-900 dark:text-slate-50  hover:text-sky-400  dark:hover:text-sky-400 focus:text-sky-500 dark:focus:text-sky-500">
-                                <a class="nav-link" href="/price">Карьера</a>
-                            </button>
-                        </li>
-                    </ul>
-                    <ul class="flex items-center gap-8 ">
-
-
-                        <li href="hдл">
-                            <button class="TEXT-LINK text-slate-900 dark:text-slate-50 hover:text-sky-400 dark:hover:text-sky-400  dark:focus:text-slate-500">
-                                <a href="https://instagram.com/KristalikA"><i class="fa-brands fa-instagram"></i> </a>
-
-                            </button>
-                        </li>
-                        <li href="л">
-                            <button class="TEXT-LINK text-slate-900 dark:text-slate-50 hover:text-sky-400 dark:hover:text-sky-400  dark:focus:text-slate-500">
-
-                                <a href="https://vk.com/KristalikA">
-                                    <i class="fa-brands fa-vk"></i> </a>
-
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="_editable_jwu41_1 undefined" data-link="link=&amp;target=_blank&amp;">© KristalikA 2024, Все
-                    права защищены
-                </div>
-            </div>
-        </div>
-    </section>
+    <footer th:insert="~{blocks/foooter ::  footer}"></footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -1900,5 +1849,10 @@
         });
     </script>
 </form>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
 </body>
 </html>
