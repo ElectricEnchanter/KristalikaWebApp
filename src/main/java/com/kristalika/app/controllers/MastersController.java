@@ -27,32 +27,16 @@ public class MastersController {
 
     @Autowired
     private MastersRepository mastersRepository;
-    @Autowired
-    private AppointmentRepository appointmentRepository;
-//	private HttpServletRequest request;
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
-
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("userName")) {
-                return "redirect:/service";
-            }
-        }
-//		HttpSession session = request.getSession();
-//		Integer count = (Integer) session.getAttribute("count");
-//		if(count == null){
-//			session.setAttribute("count", 1);
-//			count = 1;
-//		}
-//		else {
-//			session.setAttribute("count", count + 1);
-//		}
-
-        //счетчик заходов
-
-//		model.addAttribute("count", count);
+        // попытка сделать автозаход
+//        Cookie[] cookies = request.getCookies();
+//        for (Cookie cookie : cookies) {
+//            if (cookie.getName().equals("userName")) {
+//                return "redirect:/service";
+//            }
+//        }
         return "login";
     }
 
@@ -85,19 +69,7 @@ public class MastersController {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("userName")) {
                 String username = cookie.getValue();
-                Long id = mastersRepository.findIdByName(username);
                 model.addAttribute("userName", username);
-                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
-
-                System.out.println(formattedDate);
-                System.out.println(appointment);
-                System.out.println(id);
-
-                formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
-                formattedDate = formatter.format(today);
-
-                model.addAttribute("appointment", appointment);
-                model.addAttribute("date", formattedDate);
                 break;
             }
         }
@@ -110,6 +82,7 @@ public class MastersController {
     @PostMapping
     public String service(Model model, HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
+        System.out.println("wwwwwww");
         if (cookies != null)
             for (Cookie cookie : cookies) {
                 System.out.println();
@@ -117,6 +90,7 @@ public class MastersController {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
+
         return "redirect:/login";
     }
 
@@ -137,7 +111,7 @@ public class MastersController {
         String master = mastersRepository.findNameByPin(oldPin);
 
         if (master != null) {
-             mastersRepository.updatePin(newPin, oldPin);
+            mastersRepository.updatePin(newPin, oldPin);
         }
         return "redirect:/service";
     }
