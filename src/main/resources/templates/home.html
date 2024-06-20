@@ -1553,6 +1553,47 @@
         place-content: center;
     }
 
+    .banner-container {
+        overflow: hidden;
+        position: relative;
+        border-radius: 1.5rem
+    }
+    .banner-container ul {
+        padding: 0;
+        display: flex;
+        width: calc(100% + 60px);
+        margin-left: -30px;
+    }
+    .banner-container li {
+        clip-path: polygon(60px 0%, 100% 0%, calc(100% - 60px) 100%, 0% 100%);
+        position: relative;
+        margin: 0 -35px;
+        width: calc(100% / 3 + 70px); /* 5 - кол-во фотографий */
+        transition: width 0.5s ease-in;
+    }
+    .banner-container li a {
+        display: block;
+        background: #000;
+
+    }
+    .banner-container li a img {
+        max-width: none;
+        height: 450px;
+        width: 100%;
+        object-fit: cover;
+        opacity: 0.6;
+        transition: opacity 0.7s ease-in;
+
+
+    }
+    .banner-container ul li:hover {
+        width: 300%;
+    }
+    .banner-container ul li:hover a img {
+        opacity: 1;
+    }
+
+
 
     </style>
     <style type="text/css">.rfm-marquee-container {
@@ -1564,6 +1605,7 @@
     }
 
     </style>
+
 
 </head>
 
@@ -1623,17 +1665,32 @@
 
         </div>
 
-        <div class="gallery w-full h-auto flex gap-4" style="opacity: 1; transform: none;">
-            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"
-                 src="https://images.unsplash.com/photo-1536051424396-06f39b8fa1b4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNjAzNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTc1NzYzMzV8&amp;ixlib=rb-4.0.3&amp;q=80&amp;h=1400">
+<!--        <div class="gallery w-full h-auto flex gap-4" style="opacity: 1; transform: none;">-->
+<!--            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"-->
+<!--                 src="https://images.unsplash.com/photo-1536051424396-06f39b8fa1b4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNjAzNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTc1NzYzMzV8&amp;ixlib=rb-4.0.3&amp;q=80&amp;h=1400">-->
 
-            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"
-                 src="https://news.store.rambler.ru/img/86fabc0cc4be63faf5b60bf1ac907844?img-format=auto&img-1-resize=height:730,fit:max">
-            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"
-                 src="https://sunlight.net/wiki/wp-content/uploads/2022/08/Manikyur-dlya-ofisa-27.jpg">
+<!--            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"-->
+<!--                 src="https://news.store.rambler.ru/img/86fabc0cc4be63faf5b60bf1ac907844?img-format=auto&img-1-resize=height:730,fit:max">-->
+<!--            <img class="w-20 IMAGE relative group h-[22rem] overflow-hidden bg-origin-content rounded-2xl transition-all duration-500 md:h-[35rem] md:rounded-3xl w-full h-full bg-zinc-200 dark:bg-zinc-700 object-cover transition-all ease-in-out duration-300 group-hover:scale-110"-->
+<!--                 src="https://sunlight.net/wiki/wp-content/uploads/2022/08/Manikyur-dlya-ofisa-27.jpg">-->
 
+<!--        </div>-->
+        <div class="banner-container">
+            <ul class="ul-width">
+                <li>
+                    <a href="#"><img src="https://images.unsplash.com/photo-1536051424396-06f39b8fa1b4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNjAzNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTc1NzYzMzV8&amp;ixlib=rb-4.0.3&amp;q=80&amp;h=1400" alt="" /></a>
+                    <span class="overlay"></span>
+                </li>
+                <li>
+                    <a href="#"><img src="https://sunlight.net/wiki/wp-content/uploads/2022/08/Manikyur-dlya-ofisa-27.jpg" alt="" /></a>
+                    <span class="overlay"></span>
+                </li>
+                <li>
+                    <a href="#"><img src="https://n1s1.hsmedia.ru/05/9c/ff/059cff168a53ede2e9ce481f1b6b1ee4/1080x1080_0xac120003_20762618071645531022.jpeg" alt="" /></a>
+                    <span class="overlay"></span>
+                </li>
+            </ul>
         </div>
-
 
     </div>
 </section>
@@ -1751,7 +1808,7 @@
 
             <div class="relative overflow-hidden snap-start scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
                 <img class="IMAGE w-[18.75rem] h-[25rem] aspect-[3/4] object-cover rounded-lg bg-slate-100"
-                     src="https://images.unsplash.com/photo-1482101711228-1d205746bb02?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNjAzNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTc1NzYzMzh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;h=800"
+                     src="https://sblpro.ru/wp-content/uploads/2023/09/nudoviy-manicure.webp"
                      alt="Профессиональный уход">
                 <p class="TEXT-CONTENT mt-5 text-base font-bold text-slate-700 dark:text-white/80">
                 <div class="_editable_jwu41_1 undefined" data-link="link=&amp;target=_blank&amp;">Индивидуальный
@@ -1762,7 +1819,7 @@
 
             <div class="relative overflow-hidden snap-start scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
                 <img class="IMAGE w-[18.75rem] h-[25rem] aspect-[3/4] object-cover rounded-lg bg-slate-100"
-                     src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzNjAzNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTc1NzYzMzh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;h=800"
+                     src="https://icdn.lenta.ru/images/2024/02/01/17/20240201174926156/pic_78b27fa3e4c62cf5500dc975a8bee0ff.jpg"
                      alt="Креативный маникюр">
                 <p class="TEXT-CONTENT mt-5 text-base font-bold text-slate-700 dark:text-white/80">
                 <div class="_editable_jwu41_1 undefined" data-link="link=&amp;target=_blank&amp;">Безопасная работа
