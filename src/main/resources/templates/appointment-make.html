@@ -1694,27 +1694,28 @@
                 <h2 class="TITLE-PRIMARY text-4xl font-semibold tracking-tight text-slate-900 md:text-5xl dark:text-white/90">
                     <div class="_editable_jwu41_1 undefined"
                          data-link="link=&amp;target=_blank&amp;">
-                        Добрый день, Вы хотите выбрать эту запись?
+                        Добрый день,<br/>
+                        Вы хотите выбрать эту запись?
                     </div>
-                </h2>
+                </h2><br>
 
                 <div th:each="el : ${appointment}" class="alert alert-info mt-2">
                     <h3 th:text="'Дата: ' +  ${el.date}"/>
                     <p th:text="'Время: ' + ${el.time}"/>
                     <p th:text="'Мастер: ' + ${master}"/>
 
-                </div>
+                </div><br>
 
 
+                <div class="flex items-start">
                 <div class="_icon-wrapper_kin0q_1 text-lg text-sky-500 dark:text-white/90 shrink-0"
-                     propkey="officeHours_0_icon" data-library="FontAwesome">
-                    <i class="fa-regular fa-calendar-days"></i></div>
+                     propkey="officeHours_3_icon" data-library="FontAwesome">
+                    <i class="fa-solid fa-calendar-days"></i></div>
                 <div class="ml-4">
-
                     <h3 class="TITLE-SECONDARY text-lg font-medium text-slate-900 dark:text-white/90">
                         <div class="_editable_jwu41_1 undefined"
                              data-link="link=&amp;target=_blank&amp;">
-                            Расскажите нам о себе
+                            Расскажите нам о себе, чтобы мы могли подготовиться к встрече
                         </div>
                     </h3>
                     <p class="DESC mt-4 text-sm font-normal text-slate-600 dark:text-white/90">
@@ -1725,13 +1726,20 @@
                             <input type="text" name="info" placeholder="Введите Ваш телефон"
                                    class="form-control"><br>
                             <input type="text" name="note"
-                                   placeholder="Введите что вы хотите, чтобы сделал мастер"
+                                   placeholder="Что Вы хотите, чтобы сделал мастер?"
                                    class="form-control"><br>
-                            <button type="submit" class="btn btn-success">Добавить статью</button>
+                            <button class="BTN-PRIMARY w-fit h-12 px-3 group whitespace-nowrap text-sm font-semibold uppercase text-white flex gap-2 items-center rounded-full bg-blue-500 hover:bg-blue-600 hover:transition-all hover:duration-300 md:text-base md:h-14 md:px-8">
+
+                                <div class="_editable_jwu41_1 undefined" data-link="link=%2Fcontact&amp;target=_blank&amp;">
+                                    <a href="/appointment">Записаться сейчас</a>
+                                </div>
+                                <i class="fa-solid fa-arrow-right fa-beat-fade"></i>
+                            </button><br>
                         </form>
                     </div>
 
                     </p>
+                    </div>
 
                 </div>
 
