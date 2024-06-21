@@ -88,7 +88,7 @@ public class AppointmentController {
         Clients client = new Clients(apppointId, name, info, note);
         System.out.println(clientRepository.findAppointmentById(apppointId));
 
-        if (clientRepository.findAppointmentById(apppointId).toString().equals("[]")) {
+        if(clientRepository.findAppointmentById(apppointId).toString().equals("[]")){
             System.out.println(clientRepository.findAppointmentById(apppointId));
             clientRepository.save(client);
             System.out.println("save");
@@ -198,10 +198,11 @@ public class AppointmentController {
                     System.out.println(ids.get(i));
                     Iterable<Clients> clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
                     System.out.println(clients);
-                    if (Objects.equals(clients.toString(), "[]")) {
+                    if (Objects.equals(clients.toString(), "[]")){
                         System.out.println("Свободно");
                         status.addLast("Свободно");
-                    } else {
+                    }
+                    else {
                         System.out.println("Занято");
                         status.addLast("Занято");
                         model.addAttribute("client", clients);
