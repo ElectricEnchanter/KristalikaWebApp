@@ -102,7 +102,7 @@ public class MastersController {
 
     @GetMapping("/pin-reset")
     public String pinReset(Model model) {
-        return "/pin-reset";
+        return "pin-reset";
     }
 
     @PostMapping("/pin-reset")

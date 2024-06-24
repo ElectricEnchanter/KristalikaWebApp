@@ -181,6 +181,7 @@ public class AppointmentController {
 //        SELECT * FROM CLIENTS JOIN public.appointment a on a.id = CLIENTS.appointment_id;
 
 
+
         model.addAttribute("date", date);
 
         Cookie[] cookies = request.getCookies();
@@ -193,22 +194,23 @@ public class AppointmentController {
                 System.out.println(ids);
                 model.addAttribute("appointment", appointment);
 
-                ArrayList<String> status = new ArrayList<>();
+//                ArrayList<String> status = new ArrayList<>();
                 for (int i = 0; i < ids.toArray().length; i++) {
                     System.out.println(ids.get(i));
                     Iterable<Clients> clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
                     System.out.println(clients);
                     if (Objects.equals(clients.toString(), "[]")){
                         System.out.println("Свободно");
-                        status.addLast("Свободно");
+//                        status.addLast("Свободно");
                     }
                     else {
                         System.out.println("Занято");
-                        status.addLast("Занято");
+//                        status.addLast("Занято");
                         model.addAttribute("client", clients);
                     }
                 }
-                model.addAttribute("status", status);
+//                    model.addAttribute("status", status);
+
 
             }
         }

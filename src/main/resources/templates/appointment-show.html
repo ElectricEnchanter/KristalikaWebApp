@@ -31,10 +31,11 @@
         <h3 th:text="'Дата: ' + ${el.date}"/>
         <p th:text="'Время: ' + ${el.time}"/>
 <!--        <p th:text="${el.id}"/>-->
-        <div th:each="el1 : ${status.getFirst()}">
-            <p th:text="'Статус: ' + ${el1}"/>
-            <p th:each="el1 : ${status.removeFirst()}">
-        </div>
+<!--        <div th:each="el1 : ${status.getFirst()}">-->
+<!--            <p th:text="'Статус: ' + ${el1}"/>-->
+<!--            <p th:each="el1 : ${status.removeFirst()}">-->
+<!--        </div>-->
+
 
         <div th:each="el2 : ${client}">
             <p th:text="'Имя: ' + ${el2.getClientName()}"/>
