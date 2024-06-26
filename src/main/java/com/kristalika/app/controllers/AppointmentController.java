@@ -200,7 +200,7 @@ public class AppointmentController {
             System.out.println("ID " + i + ": " + ids.get(i));
             Clients clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
 
-            System.out.println("Клиент: " + clients);
+//            System.out.println("Клиент: " + clients);
             if (!Objects.equals(clients, null)) {
                 System.out.println("Занято");
                 status.addLast("Занято");
@@ -212,7 +212,10 @@ public class AppointmentController {
         ArrayList<Clients> res = new ArrayList<>();
         for (int i = 0; i < ids.toArray().length; i++) {
             Clients clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
-            res.addLast(clients);
+            System.out.println("Клиент: " + clients);
+            if (Objects.equals(clients, null)) {
+                res.add(new Clients(0L, "Нет", "Нет", "Нет"));
+            }else res.addLast(clients);
         }
         model.addAttribute("client", res);
         model.addAttribute("status", status);
