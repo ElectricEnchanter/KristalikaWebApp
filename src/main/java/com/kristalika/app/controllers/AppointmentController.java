@@ -87,8 +87,9 @@ public class AppointmentController {
     public String appointmentMakeAdd(@PathVariable(value = "id") Long apppointId, @RequestParam("client") String name, @RequestParam("info") String info, @RequestParam("note") String note, Model model) {
         Clients client = new Clients(apppointId, name, info, note);
         System.out.println(clientRepository.findAppointmentById(apppointId));
+        System.out.println(clientRepository.findAppointmentById(apppointId));
 
-        if(clientRepository.findAppointmentById(apppointId).toString().equals("[]")){
+        if (clientRepository.findAppointmentById(apppointId) == null) {
             System.out.println(clientRepository.findAppointmentById(apppointId));
             clientRepository.save(client);
             System.out.println("save");
@@ -146,74 +147,77 @@ public class AppointmentController {
         model.addAttribute("date", formattedDate);
         formatter = new SimpleDateFormat("dd.MM.yy"); // "dd" - день, "MM" - месяц, "yyyy" - год
         formattedDate = formatter.format(today);
+        String username = "";
 
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("userName")) {
-                String username = cookie.getValue();
-                Long id = mastersRepository.findIdByName(username);
+                username = cookie.getValue();
+
                 model.addAttribute("userName", username);
-                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
-
-                System.out.println(formattedDate);
-                System.out.println(appointment);
-                System.out.println(id);
-
-                formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
-                formattedDate = formatter.format(today);
-
-                model.addAttribute("appointment", appointment);
-                model.addAttribute("date", formattedDate);
-                break;
             }
         }
+        Long id = mastersRepository.findIdByName(username);
+        Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(formattedDate, id);
+
+//                System.out.println(formattedDate);
+//                System.out.println(appointment);
+//                System.out.println(id);
+
+        formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
+        formattedDate = formatter.format(today);
+
+        model.addAttribute("appointment", appointment);
+        model.addAttribute("date", formattedDate);
+
 
         return "appointment-show";
     }
 
     @PostMapping("/appointment/show")
     public String appointmentShowElseDate(@RequestParam("datepick") String date, Model model, HttpServletRequest request) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM"); // "dd" - день, "MM" - месяц, "yyyy" - год
-//        String formattedDate = formatter.format(date);
-
-
-        // тут можно переписать
-//        SELECT * FROM CLIENTS JOIN public.appointment a on a.id = CLIENTS.appointment_id;
-
-
 
         model.addAttribute("date", date);
+        String username = "";
 
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("userName")) {
-                String username = cookie.getValue();
-                Long id = mastersRepository.findIdByName(username);
-                Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, id);
-                ArrayList<Integer> ids = appointmentRepository.findIdByDateAndId(date, id);
-                System.out.println(ids);
-                model.addAttribute("appointment", appointment);
-
-//                ArrayList<String> status = new ArrayList<>();
-                for (int i = 0; i < ids.toArray().length; i++) {
-                    System.out.println(ids.get(i));
-                    Iterable<Clients> clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
-                    System.out.println(clients);
-                    if (Objects.equals(clients.toString(), "[]")){
-                        System.out.println("Свободно");
-//                        status.addLast("Свободно");
-                    }
-                    else {
-                        System.out.println("Занято");
-//                        status.addLast("Занято");
-                        model.addAttribute("client", clients);
-                    }
-                }
-//                    model.addAttribute("status", status);
-
+                username = cookie.getValue();
+                model.addAttribute("userName", username);
 
             }
         }
+        Long id = mastersRepository.findIdByName(username);
+        Iterable<Appointment> appointment = appointmentRepository.findAppointmentByDateAndId(date, id);
+
+        ArrayList<Integer> ids = appointmentRepository.findIdByDateAndId(date, id);
+        System.out.println("IDs : " + ids);
+        model.addAttribute("appointment", appointment);
+
+        ArrayList<String> status = new ArrayList<>();
+        for (int i = 0; i < ids.toArray().length; i++) {
+            System.out.println("ID " + i + ": " + ids.get(i));
+            Clients clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
+
+            System.out.println("Клиент: " + clients);
+            if (!Objects.equals(clients, null)) {
+                System.out.println("Занято");
+                status.addLast("Занято");
+            } else {
+                System.out.println("Свободно");
+                status.addLast("Свободно");
+            }
+        }
+        ArrayList<Clients> res = new ArrayList<>();
+        for (int i = 0; i < ids.toArray().length; i++) {
+            Clients clients = clientRepository.findAppointmentById(Long.valueOf(ids.get(i)));
+            res.addLast(clients);
+        }
+        model.addAttribute("client", res);
+        model.addAttribute("status", status);
+
+
         return "appointment-show";
     }
 

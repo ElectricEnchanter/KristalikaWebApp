@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ClientRepository extends CrudRepository<Clients, Long> {
 
     @Query(value = "SELECT * FROM CLIENTS WHERE appointment_id = ?1 ", nativeQuery = true)
-    Iterable<Clients> findAppointmentById(Long appointmentId);
+    Clients findAppointmentById(Long appointmentId);
 
     @Transactional
     @Modifying

@@ -24,4 +24,7 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Long>
     @Query(value = "SELECT name FROM masters JOIN appointment ON masters.id = ?1 LIMIT 1", nativeQuery = true)
     String findMasterNameById(Long id);
 
+//    @Query(value = "SELECT  clients.id , CLIENTS.client_name, CLIENTS.info, clients.note, a.time, a.date FROM CLIENTS JOIN appointment a on a.id = CLIENTS.appointment_id WHERE a.date = ?1", nativeQuery = true)
+//    Iterable<Appointment> findClientsAppointmentsByDate(String date);
+
 }
